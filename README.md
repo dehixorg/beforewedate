@@ -1,53 +1,38 @@
-# BeforeWeDate — Monorepo
+# BeforeWeDate Verified
 
-## Architecture Overview
-This is a `pnpm` + Turborepo monorepo consisting of:
-- **`apps/mobile`**: Expo (React Native) consumer mobile app.
-- **`apps/admin`**: Next.js App Router admin dashboard.
-- **`apps/api`**: NestJS backend for secure Azure AI processing.
-- **`packages/shared`**: Shared TypeScript definitions and Zod schemas.
-- **`supabase/migrations`**: PostgreSQL database schemas with RLS and PostGIS/vector support.
+A zero-knowledge trust layer for dating. Prove you're a real, age-verified human without ever exposing your ID to a stranger, a third-party vendor, or our servers.
 
-## Prerequisites
-- Node.js 20+
-- pnpm 9+
-- Supabase CLI
-- Docker (for local Supabase)
+**Submission for Akindo Wave Hacks - Midnight Network**  
+[Hackathon Event Link](https://app.akindo.io/wave-hacks/jaMZjqPOBsLXvjdG)
 
-## Installation
-1. Install dependencies across the entire monorepo:
-   ```bash
-   pnpm install
-   ```
-2. Copy the `.env.example` file in each app to `.env` and fill in your keys (e.g., Azure keys in `apps/api/.env`).
+---
 
-## Running the Apps
+## 🏆 Hackathon Vision: The Zero-Knowledge Trust Layer
 
-You can run individual apps from the root directory using Turborepo.
+Modern dating apps force a dangerous trade-off: you either blindly trust an unverified stranger's claims, or you hand over a highly sensitive scan of your Government ID to a centralized third-party verification vendor (creating a massive honeypot of personal data). 
 
-**Run the NestJS Backend API:**
-```bash
-pnpm --filter api run start:dev
-```
+Unverified profiles enable catfishing and unsafe real-world meetups. Centralized verification strips users of their privacy. 
 
-**Run the Next.js Admin Dashboard:**
-```bash
-pnpm --filter admin run dev
-```
+**BeforeWeDate** solves this by integrating **Midnight Compact contracts**. Before meeting up in real life, either side can prove they are a real, age-verified, unique person. Only a cryptographic pass/fail proof is ever shared. The underlying ID document never touches our servers, the other user's device, or the blockchain.
 
-**Run the Expo Mobile App:**
-```bash
-pnpm --filter mobile run start
-```
+## ✨ Ecosystem Features
 
-**Run everything concurrently (not recommended unless your machine has high resources):**
-```bash
-pnpm run dev
-```
+1. **The "Reality Check" Trust Score (Powered by Midnight ZK):**
+   Every user has a dynamic Trust Score (0-100). Premium users can set a "Trust Filter", guaranteeing high-quality, verified matches without compromising privacy.
+2. **Time-Boxed "Blind" Chat:**
+   Stop judging books purely by their cover. When you match, photos are heavily blurred. You are dropped into a realtime chat where you must actually talk to each other to slowly reveal your profiles.
+3. **The AI Relationship Coach:**
+   Your personal wingman, built directly into the chat. The AI (running securely in our private Azure tenant) reads both profiles and suggests highly personalized icebreakers to revive the spark.
+4. **"Ghost Mode" (Geospatial Serendipity):**
+   When you walk into a "Partner Venue," toggle on Ghost Mode to see an anonymous radar of other singles currently in the same room. You match digitally while sitting 20 feet apart.
 
-## Running the CI Checks
-To verify type safety and linting across the entire monorepo:
-```bash
-pnpm run lint
-pnpm run typecheck
-```
+## 🛠️ Tech Stack
+- **Zero-Knowledge Layer:** Midnight Network (Compact contracts, Midnight JS SDK)
+- **Web App / Admin Dashboard:** Next.js (React 19, Tailwind CSS v4, Shadcn)
+- **Mobile App:** React Native (Expo), TypeScript
+- **Backend API:** NestJS (Node.js) 
+- **Database & Auth:** Supabase (PostgreSQL) with `pgvector` & `PostGIS`
+- **AI & Moderation:** Azure OpenAI (`gpt-4o-mini`) & Azure AI Content Safety
+
+## 🚀 Demo
+The web app contains a special **Demo Mode** designed specifically for hackathon judges to bypass SMS authentication and explore the UI without needing a real backend connection.
