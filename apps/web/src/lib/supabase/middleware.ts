@@ -7,7 +7,6 @@ export async function updateSession(request: NextRequest) {
   })
 
   // Failsafe: If environment variables are missing, don't crash the middleware.
-  // Just let the user pass through so the demo UI can render.
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     console.warn('Missing Supabase environment variables. Bypassing auth middleware.')
     return supabaseResponse
@@ -39,19 +38,27 @@ export async function updateSession(request: NextRequest) {
       data: { user },
     } = await supabase.auth.getUser()
 
+    // Allow judges to access the demo dashboard without authenticating
     if (
       !user &&
       !request.nextUrl.pathname.startsWith('/login') &&
-      !request.nextUrl.pathname.startsWith('/auth')
+      !request.nextUrl.pathname.startsWith('/auth') &&
+      !request.nextUrl.pathname.startsWith('/demo')
     ) {
       const url = request.nextUrl.clone()
       url.pathname = '/login'
       return NextResponse.redirect(url)
     }
 
+    // If they hit the root, send them to demo for now
+    if (request.nextUrl.pathname === '/') {
+      const url = request.nextUrl.clone()
+      url.pathname = '/demo'
+      return NextResponse.redirect(url)
+    }
+
     return supabaseResponse
   } catch (e) {
-    // Failsafe 2: If anything goes wrong inside the Supabase client, don't crash Vercel.
     console.error('Supabase middleware error:', e)
     return supabaseResponse
   }

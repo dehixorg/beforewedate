@@ -36,5 +36,6 @@ export async function verifyOtp(formData: FormData) {
     return { error: error.message }
   }
 
-  redirect('/onboarding')
+  // Redirect to demo instead of non-existent onboarding
+  redirect('/demo')
 }
